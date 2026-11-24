@@ -1,0 +1,23 @@
+{
+  "commit_3b": "da093192ce0b8d30210dff6e9c4345a209b57b66",
+  "congelado_3b_sha256": "5f820b8e3081e1d6053237c87f3cfff950c3c568b617c7777be2c2d84b818633",
+  "sha256_controles_adicionales": {
+    "src/generar_imagenes.py": "a3c65992853a9fe5bfcf634744f25449859c055f979fe002512a52cc86ee6150",
+    "src/verificar_protocolo.py": "92c5938347f079a28048e1c221e4e2fbbb1f7864b05e45d43d43dca6a3dda5cb",
+    "eda/activos_desarrollo.csv": "77192a3d6c9836f5ef9ba98dc71ad942c3af83954bbcedfac311a89b820d8ace",
+    "eda/cadencia_mensual_desarrollo.csv": "78972fad039ec1e521092780af61a8889c5be7c43481407a517566631cb8b547"
+  },
+  "ohlc_local": "../entregables/02 — Base semanal/OHLC_diario_yf20261114T2019Z.csv",
+  "bloque": "prueba_retrospectiva",
+  "cortes": ["2026-07-14", "2026-08-13", "2026-09-14", "2026-10-13"],
+  "elegibles_por_corte": 34,
+  "vistas": {"meses": 6, "ruedas": 9},
+  "ruedas_de_tenencia": 20,
+  "regla_compra": "p >= umbral",
+  "capital_inicial": 100.0,
+  "costo_total_compra": 0.002,
+  "efectivo_por_periodo": 0.0,
+  "epocas": {"mensual": 2, "mensual_diaria": 1},
+  "umbrales": {"mensual": 0.5, "mensual_diaria": 0.5, "comprar_siempre": 0.0, "efectivo": 1.01},
+  "ejemplo_id": "KO_2026-07-14"
+}
