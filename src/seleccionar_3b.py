@@ -70,9 +70,8 @@ def comprobar_pred(ruta, filas, recalculadas, tolerancia):
 
 def recorrido_ko(filas, probabilidades, elegidos, curvas):
     fila = filas.loc[filas.activo.eq("KO")].iloc[0]
-    esquema = {k: fila[k] for k in ("id", "corte", "entrada", "salida", "apertura_ajustada_t1",
-                                    "cierre_ajustado_t20", "retorno_bruto", "costo_compra",
-                                    "retorno_neto")}
+    esquema = {k: fila[k] for k in ("id", "corte", "entrada", "salida", "retorno_bruto",
+                                    "costo_compra", "retorno_neto")}
     esquema["etiqueta"] = int(fila.etiqueta)
     esquema["modelos"] = {}
     for nombre in MODELOS:
@@ -146,8 +145,8 @@ def reproducir(args, cfg, protocolo, checkpoint, manifiesto, congelado):
             print(f"Recarga {nombre}/{bloque}: error máximo {error:.2g}", flush=True)
             if bloque == "umbral":
                 guardadas = leer_csv(ruta).probabilidad.to_numpy()
-                umbral = congelado["modelos"][nombre]["umbral"]
-                np.testing.assert_array_equal(recalculadas >= umbral, guardadas >= umbral)
+                for umbral in protocolo["umbrales"]:
+                    np.testing.assert_array_equal(recalculadas >= umbral, guardadas >= umbral)
                 probabilidades[nombre] = pd.Series(guardadas, index=filas.id)
         del imagenes
     filas = resultados_ohlc(args.ohlc, filas_elegibles(manifiesto, "umbral"), protocolo)
@@ -170,6 +169,13 @@ def reproducir(args, cfg, protocolo, checkpoint, manifiesto, congelado):
         raise ValueError("Las métricas predictivas guardadas difieren de la reproducción")
     if recorrido_ko(filas, probabilidades, elegidos, curvas) != leer_json(args.publico / "operacion_ko.json"):
         raise ValueError("El recorrido de KO difiere de la reproducción")
+    entrenamiento = leer_json(args.publico / "entrenamiento.json")
+    for nombre in MODELOS:
+        checkpoint["modelos"][nombre]["probabilidades"]["umbral"] = (
+            congelado["modelos"][nombre]["probabilidades"]["umbral"]
+        )
+    if entrenamiento != checkpoint:
+        raise ValueError("El historial público difiere del registro local del entrenamiento")
     print("Reproducidos los dos umbrales, las carteras y las probabilidades guardadas.", flush=True)
 
 

@@ -1,0 +1,48 @@
+{
+  "mensual": {
+    "entrenamiento": {
+      "log_loss_por_fecha": 0.6750110618064901,
+      "brier": 0.24097530920278626,
+      "auc_roc": 0.5820535410282601,
+      "proporcion_positiva": 0.5972850678733032,
+      "p_media": 0.5498812081047852
+    },
+    "configuracion": {
+      "log_loss_por_fecha": 0.6941516552839205,
+      "brier": 0.25049735167748016,
+      "auc_roc": 0.5469365754327125,
+      "proporcion_positiva": 0.5103806228373703,
+      "p_media": 0.5505636465384474
+    },
+    "umbral": {
+      "log_loss_por_fecha": 0.6862329218101677,
+      "brier": 0.24655546059775574,
+      "auc_roc": 0.5217823842823843,
+      "proporcion_positiva": 0.5537525354969574,
+      "p_media": 0.5496044378372525
+    }
+  },
+  "mensual_diaria": {
+    "entrenamiento": {
+      "log_loss_por_fecha": 0.6667422261557946,
+      "brier": 0.23712874556092933,
+      "auc_roc": 0.568292049710589,
+      "proporcion_positiva": 0.5972850678733032,
+      "p_media": 0.6009808559493242
+    },
+    "configuracion": {
+      "log_loss_por_fecha": 0.7129527175077848,
+      "brier": 0.25940345349362126,
+      "auc_roc": 0.529568185901659,
+      "proporcion_positiva": 0.5103806228373703,
+      "p_media": 0.605232892255057
+    },
+    "umbral": {
+      "log_loss_por_fecha": 0.6932872934877075,
+      "brier": 0.249931882385101,
+      "auc_roc": 0.5007055444555445,
+      "proporcion_positiva": 0.5537525354969574,
+      "p_media": 0.6063061129248892
+    }
+  }
+}

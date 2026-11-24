@@ -1,0 +1,36 @@
+{
+  "id": "KO_2023-07-14",
+  "corte": "2023-07-14",
+  "entrada": "2023-07-17",
+  "salida": "2023-08-11",
+  "retorno_bruto": 0.006747889117900918,
+  "costo_compra": 0.002,
+  "retorno_neto": 0.004747889117901002,
+  "etiqueta": 1,
+  "modelos": {
+    "mensual": {
+      "probabilidad": 0.5608285665512085,
+      "umbral": 0.5,
+      "compra": true,
+      "capital_asignado": 2.9411764705882355,
+      "aporte_al_capital_del_corte": 0.013964379758532361,
+      "capital_final_del_corte": 101.67385602663559,
+      "capital_inicial_del_corte": 100.0,
+      "elegibles": 34,
+      "operaciones_del_corte": 34,
+      "efectivo_del_corte": 0.0
+    },
+    "mensual_diaria": {
+      "probabilidad": 0.5738855004310608,
+      "umbral": 0.5,
+      "compra": true,
+      "capital_asignado": 2.9411764705882355,
+      "aporte_al_capital_del_corte": 0.013964379758532361,
+      "capital_final_del_corte": 101.67385602663559,
+      "capital_inicial_del_corte": 100.0,
+      "elegibles": 34,
+      "operaciones_del_corte": 34,
+      "efectivo_del_corte": 0.0
+    }
+  }
+}

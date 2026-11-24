@@ -1,0 +1,108 @@
+{
+  "generador_commit": "2a0423c41ef0822447ae87d7e6e11ff69eca06bc",
+  "ohlc_sha256": "7906de97be2145f79434dcb1f0a474d2c01ed1da7cc4a7dad1ce63c35683eb31",
+  "manifiesto": "verificacion/manifiesto.csv",
+  "indice_local": "data/imagenes/indice.csv",
+  "indice_sha256": "5064cd62f564415de489edaa5fb831b019b56ceac599edd15581c90edfa1c211",
+  "pesos_y_probabilidades_locales": "data/etapa_3b",
+  "checkpoints_sha256": "34672bea82631eb86c136b4f35f97ea90af2106f37e9921df6d17c09e47b2afc",
+  "etiquetas_entrenamiento_configuracion_sha256": "03c2e81fd89fd4b29b983e98b2248981d0451fd9aac728ffb7f40aa825110e32",
+  "etiquetas_umbral_sha256": "cfacf0ca519bce7cca5f0596054a3ca182352d99a5a2b7e1e6ab0c7379f470f9",
+  "descartes_sha256": "0e0e5458b2bf82373ef09683e3d82f5391ae239908d63286f02716d3a5953fe0",
+  "sha256_versionados": {
+    "informe/protocolo.md": "e2a442c5e97d9afa9c8b4f283d20a75e868e9e26b410fc1b109284cbc1aa6d0e",
+    "config/experimento.json": "5efbca0d034a61e19a5da99c03ac105dfce737b46483935d05a594c9e927e9a3",
+    "config/entrenamiento_cnn.json": "7d9837b762bed21e2ade3ec3739b29aee159b9dab3e34815c230efd690d42dd1",
+    "config/render.json": "283ef590e7833a5c33ca40b4ba05595345a182bb407f162c69112d4a970dbdc2",
+    "config/escalas_imagenes.json": "6ae08ebf2b0310e25e68832678604c3a575119d91be79262064df07551a463c6",
+    "requirements-cnn.txt": "c47fcabd36ab7c3fb3e5f5feeb4e62d109de6efd847f05961bdc88f92f46ce52",
+    "requirements-imagenes.txt": "2bcf7c60ae1124a2557fbea71b2262b95781d28bd95ef3e2be03bc5a1444dc05",
+    "src/cnn_modelos.py": "40180c5a3c95a05f9bd04f23dd3758fc4977e16a613090c7f7f1e66e575448fb",
+    "src/datos_3b.py": "415f0de211b0bc8f7f9c3df29ab8b8b39b099d23a8ee606530bdec8bb84f7cc0",
+    "src/cartera.py": "016b345897ba93f65d64c1bc937d002aa676f81d7727b449bb2bcd6e6f55041d",
+    "src/seleccionar_3b.py": "7c3e3d51f7065a730fa9bbda8c5498aa4f0c6c5e27054d07e0be0bf98e547aa5",
+    "src/entrenar_3b.py": "e92424eb41f9b580fe62d67f534089285d7c1e9a5152a0e88262f75125363696",
+    "src/cargar_imagenes.py": "e31d34d7e61e603d4157cfefa59d80a9c2bdd57c93b5932b80b39122464e0f7f",
+    "src/render_velas.py": "70ad7eea39d5e1cde99f1f15c2aa65f59cf8475af9dd4a35b5fd4be7f48c8b67",
+    "src/ventanas.py": "3882371a7c3eadf428f1cbe53f9db9ca4eecd2020a3840a0f35d4408c9820a86",
+    "verificacion/imagenes/ids_ajuste.txt": "0edbfd9a06bf75831539ce838ceb8ba05a48a1580c7897b2828bf0f0b3d0392e",
+    "verificacion/manifiesto.csv": "adc6b6fdfb828e4e05439c29854922daaa77001107a59f6f339705fe57c710cc",
+    "verificacion/imagenes/controles.json": "b06f26aa6c25600b5e32c40c03d04c71406872db47a7306ddedd3e7b54b27ed4"
+  },
+  "tablas_sha256": {
+    "seleccion_umbral.csv": "9d508fae65a4191a5fdadd34899c75e24d905a46034bac2ee7694f06e237cf19",
+    "carteras_por_corte.csv": "7827ac347526141da03f054f706434c96c1a721f7f15dcc859b636298299a533",
+    "carteras_resumen.csv": "34bd6f39ca19a5e617ffe6203564e10b70eaa178753fedcbd743d753a782a894"
+  },
+  "regla": {
+    "compra": "p >= umbral",
+    "grilla": [
+      0,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      1.01
+    ],
+    "criterio": "Máximo capital final por unidad inicial redondeado a 12 decimales",
+    "desempate": "Umbral mayor",
+    "capital_inicial": 100.0,
+    "costo_total_compra": 0.002,
+    "efectivo_por_periodo": 0
+  },
+  "modelos": {
+    "mensual": {
+      "epoca": 2,
+      "parametros": 148881,
+      "pesos": {
+        "archivo": "pesos/mensual.weights.h5",
+        "sha256": "6045ea842bec8149fcf18b0ae919aeb09c87945d3cd25f582ec179cd90df6e57"
+      },
+      "probabilidades": {
+        "entrenamiento": {
+          "sha256": "d3a327d27526e26cf8c082c05329d4d8a5ff76fe97a6aa6e0a8d508be66c8d73",
+          "casos": 2210,
+          "max_error_abs": 0.0
+        },
+        "configuracion": {
+          "sha256": "69a1f383a15979408c8551ce21a9f53033db330ca3de5918625c713bf778bcaf",
+          "casos": 578,
+          "max_error_abs": 0.0
+        },
+        "umbral": {
+          "sha256": "ae0d6fff1254fa14e5666c469c35442f28163a80b6747ad53a6259a79aeb2015",
+          "casos": 986,
+          "max_error_abs": 0.0
+        }
+      },
+      "umbral": 0.5
+    },
+    "mensual_diaria": {
+      "epoca": 1,
+      "parametros": 153401,
+      "pesos": {
+        "archivo": "pesos/mensual_diaria.weights.h5",
+        "sha256": "275709cd08920d5b2c5d0df0d20971f35888bc2f0c3a348d7e27684a963438b8"
+      },
+      "probabilidades": {
+        "entrenamiento": {
+          "sha256": "dbbde4f102b7c7ceaf515ae81d85ee0312f10a0d8cb44bb5d0411567accf085b",
+          "casos": 2210,
+          "max_error_abs": 0.0
+        },
+        "configuracion": {
+          "sha256": "3c76f8f71d27ff24bb71bfbb4b369201ca910d16634fa0788034811681f45f0a",
+          "casos": 578,
+          "max_error_abs": 0.0
+        },
+        "umbral": {
+          "sha256": "8d77d49ac3a6aed2a63100e21f536bef120f34f4df7bcd241152ac02ee14948a",
+          "casos": 986,
+          "max_error_abs": 0.0
+        }
+      },
+      "umbral": 0.5
+    }
+  }
+}

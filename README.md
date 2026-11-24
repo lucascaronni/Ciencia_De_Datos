@@ -2,7 +2,83 @@
 
 ¿Agregar nueve velas diarias a una CNN de seis velas mensuales mejora el retorno neto de toda la cartera? Lucas lleva adelante esta iteración. El diseño fija una evaluación retrospectiva de cuatro cortes de 2026 y deja la confirmación para un período futuro.
 
-## Etapa 3 · Generador de imágenes
+## Etapa 3B · Modelos y reglas congelados
+
+**Resultado en el bloque de umbral.** Los dos modelos eligieron `p ≥ 0,50` y compraron los 986 casos de los 29 cortes. Los dos y comprar siempre terminaron en **126,10** desde 100 (**+26,10 % neto**). El efectivo terminó en **100**. La diferencia mensual + diaria menos mensual fue **0,00 puntos porcentuales** en este bloque de selección. Los resultados retrospectivos de 2026 siguen reservados.
+
+### De las velas a la probabilidad
+
+Estos son los PNG de **KO al 14/07/2023**, el primer corte elegible del bloque de umbral. La vista mensual cubre enero a junio. La diaria cubre las nueve ruedas que terminan el 14/07. El archivo de la izquierda entra en ambas CNN.
+
+| Seis velas mensuales | Nueve velas diarias |
+|:---:|:---:|
+| ![Entrada mensual de KO](verificacion/etapa_3b/KO_2023-07-14_mensual.png) | ![Entrada diaria de KO](verificacion/etapa_3b/KO_2023-07-14_diaria.png) |
+
+El render de 3A calcula `100 × ln(P/P₀)` y conserva los límites y la compresión por frecuencia. El cargador verifica el SHA-256 y devuelve un tensor `uint8`. Dentro de cada rama una capa Keras `Rescaling(1/255)` convierte los canales a `float32` en [0, 1]. Se comprobó la primera convolución con una imagen real y los extremos negro y blanco (0 y 1). El error máximo frente a la división directa fue `5,96e−8`.
+
+La rama mensual conserva el esquema de la CNN semanal de la primera iteración, con dos convoluciones ReLU, reducción espacial, aplanado y una capa densa. La primera convolución usa paso 2 para la entrada de 192 × 192. Los dos modelos usan el mismo PNG, la misma estructura y la misma inicialización mensual. Cada CNN aprende sus propios pesos. La segunda agrega ocho rasgos de la vista diaria, los concatena con los dieciséis mensuales y aplica la sigmoide.
+
+| Capa | Salida de la rama mensual | Salida de la rama diaria |
+|---|---:|---:|
+| Entrada RGB y escalado | 192 × 192 × 3 | 192 × 192 × 3 |
+| Conv 3 × 3, paso 2 | 96 × 96 × 8 | 96 × 96 × 4 |
+| Max pooling 1 | 48 × 48 × 8 | 24 × 24 × 4 |
+| Conv 3 × 3, paso 1 | 48 × 48 × 16 | 24 × 24 × 8 |
+| Max pooling 2 | 24 × 24 × 16 | 8 × 8 × 8 |
+| Aplanar | 9.216 | 512 |
+| Densa ReLU | 16 | 8 |
+
+La mensual lleva sus 16 rasgos a una salida sigmoide y tiene **148.881 parámetros**. La doble lleva 24 rasgos concatenados a la misma clase de salida y tiene **153.401 parámetros**. En ambos casos se estima la probabilidad de que el retorno neto de comprar sea estrictamente positivo. [Dimensiones y parámetros por capa](verificacion/etapa_3b/entrenamiento.json)
+
+### Aprendizaje y elección de checkpoints
+
+| Bloque | Cortes | IDs elegibles | Etiquetas positivas | Descartes y motivo |
+|---|---:|---:|---:|---|
+| Entrenamiento 2015–2020 | 65 | 2.210 | 1.320 | 34 con salida en 2021 |
+| Configuración 2021–2022 | 17 | 578 | 295 | 204 con historia anterior y 34 con salida en 2023 |
+| Umbral 2023–2025 | 29 | 986 | 546 | 204 con historia anterior y 34 con salida en 2026 |
+| Retrospectiva 2026 | 4 | 136 | Reservadas | 204 con historia anterior y 34 sin salida en la fuente |
+
+Se reconstruyeron las ruedas y la etiqueta con la apertura ajustada de t+1 y el cierre ajustado de t+20. El retorno neto es `cierre / apertura − 1 − 0,002`. Un retorno neto igual a cero tiene etiqueta 0. Los PNG de los tres bloques de 3B coincidieron ID por ID con los hashes ordenados de 3A. El manifiesto conserva los descartes y sus motivos. [Manifiesto](verificacion/manifiesto.csv) · [Recuentos por motivo](verificacion/casos_por_bloque.csv)
+
+![Curvas de log loss de entrenamiento y configuración](verificacion/etapa_3b/curvas_entrenamiento.png)
+
+Entre las épocas 1, 2, 4 y 8, el menor log loss medio por fecha en configuración se obtuvo en la **época 2** para la mensual (**0,694152**) y en la **época 1** para dos vistas (**0,712953**). En la época 8 el entrenamiento había mejorado a 0,619901 y 0,585876, mientras configuración empeoró a 0,750617 y 0,792848. Esa divergencia indica sobreajuste. Recargar los pesos elegidos reprodujo exactamente las probabilidades por ID en los tres bloques de 3B.
+
+| Modelo | Log loss configuración | AUC configuración | Log loss umbral | AUC umbral |
+|---|---:|---:|---:|---:|
+| Mensual | 0,6942 | 0,5469 | 0,6862 | 0,5218 |
+| Mensual + diaria | 0,7130 | 0,5296 | 0,6933 | 0,5007 |
+
+El log loss de configuración eligió los pesos. Las métricas predictivas de umbral describen la separación y la calidad de sus probabilidades. La elección de umbral se hizo con el capital final de la cartera. [Historial por época](verificacion/etapa_3b/entrenamiento.json) · [Métricas predictivas](verificacion/etapa_3b/prediccion.json)
+
+### De la probabilidad a la cartera
+
+La regla ejecuta una compra si `p ≥ umbral`. Cada fecha divide el patrimonio entre los 34 elegibles. Si una decisión pasa, su parte queda en efectivo al 0 %. Cada compra descuenta 0,20 % de su parte de capital, una sola vez. Se reinvierte el saldo para el corte siguiente.
+
+| Umbral | Capital final mensual | Operaciones | Capital final mensual + diaria | Operaciones |
+|---:|---:|---:|---:|---:|
+| 0,00 | 126,10 | 986 | 126,10 | 986 |
+| 0,30 | 126,10 | 986 | 126,10 | 986 |
+| 0,40 | 126,10 | 986 | 126,10 | 986 |
+| **0,50** | **126,10** | **986** | **126,10** | **986** |
+| 0,60 | 100,00 | 0 | 112,63 | 423 |
+| 0,70 | 100,00 | 0 | 103,76 | 47 |
+| 1,01 | 100,00 | 0 | 100,00 | 0 |
+
+Se elige el mayor capital final por unidad inicial redondeado a 12 decimales. Los cuatro primeros candidatos empataron en ambos modelos; se eligió el umbral mayor, **0,50**. En los 986 casos la mensual dio probabilidades entre 0,5065 y 0,5818, y la doble entre 0,5533 y 0,7778. Por eso todas las decisiones a 0,50 fueron compras. Los umbrales elegidos y comprar siempre tuvieron 100 % de exposición media; efectivo tuvo 0 %. [Grilla completa y exposición](verificacion/etapa_3b/seleccion_umbral.csv) · [Resultados por corte](verificacion/etapa_3b/carteras_por_corte.csv)
+
+![Trayectorias de capital de las dos CNN, comprar siempre y efectivo](verificacion/etapa_3b/curvas_cartera.png)
+
+En el ejemplo de KO, las probabilidades fueron **0,5608** para la mensual y **0,5739** para la doble. Ambas compraron en la apertura del 17/07/2023 y salieron al cierre del 11/08/2023. KO recibió **2,9412** unidades (100/34), obtuvo **+0,4748 %** neto y aportó **+0,0140** unidades al patrimonio. Tras las 34 compras, cada cartera quedó en **101,6739** al terminar el corte. [Operación y efecto en la cartera](verificacion/etapa_3b/operacion_ko.json)
+
+### Alcance y reproducción
+
+La igualdad de carteras en 2023–2025 describe el bloque usado para elegir los umbrales. Las ventanas mensuales de cortes vecinos comparten hasta cinco velas y la selección del universo usó la fuente ajustada con revisión retrospectiva de precios. El primer render de 3A mostró recortes en entradas mensuales de 2026 y motivó introducir la compresión gradual. Sus parámetros se estimaron con entrenamiento. Los cuatro cortes de 2026 constituyen una **evaluación retrospectiva con resultados reservados y con entradas ya inspeccionadas**. [Auditoría del render](informe/generador.md) · [Protocolo](informe/protocolo.md)
+
+[Verificar la recarga y reproducir los umbrales](informe/reproducir_3b.md) · [Configuración congelada, rutas y SHA-256 de los pesos](config/congelado_3b.json) · [Entrenamiento](src/entrenar_3b.py) · [Selector](src/seleccionar_3b.py) · [Simulación de cartera](src/cartera.py)
+
+## Etapa 3A · Generador de imágenes
 
 | Para encontrar | Abrir |
 |---|---|
