@@ -6,7 +6,7 @@
 
 | Para encontrar | Abrir |
 |---|---|
-| Hallazgos, fuentes y decisiones para Lucas y Simon | [Nota de revisión](eda/representacion.md) |
+| Hallazgos, fuentes y decisiones para la etapa de diseño | [Nota de revisión](eda/representacion.md) |
 | Qué ve la CNN en cada longitud | [Figura de KO con las ventanas](eda/ventanas_KO.png) |
 | Casos, fechas, activos y solapamiento entre cortes | [Cortes elegibles para t+20](eda/cortes_desarrollo.csv) · [Cobertura de ventanas](eda/cobertura_ventanas_desarrollo.csv) · [Intersección por activo y corte](eda/elegibilidad_ventanas_desarrollo.csv) |
 | Vistas separadas y más cortes de desarrollo | [Combinaciones sin cruce](eda/combinaciones_ventanas_desarrollo.csv) · [Cadencia mensual](eda/cadencia_mensual_desarrollo.csv) |
