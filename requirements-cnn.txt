@@ -1,0 +1,5 @@
+-r requirements-imagenes.txt
+keras==3.10.0
+jax[cpu]==0.4.30
+scipy==1.13.1
+h5py==3.14.0

@@ -1,0 +1,27 @@
+{
+  "generador_commit": "2a0423c41ef0822447ae87d7e6e11ff69eca06bc",
+  "resolucion_rgb": [192, 192, 3],
+  "escalado_pixeles": {"tipo": "Rescaling", "divisor": 255, "offset": 0},
+  "config_render": "config/render.json",
+  "limites_render": "config/escalas_imagenes.json",
+  "protocolo": "config/experimento.json",
+  "semilla": 42,
+  "epocas": 8,
+  "epocas_candidatas": [1, 2, 4, 8],
+  "lote": 32,
+  "orden_lotes": "Una permutación de los IDs de entrenamiento por época con NumPy Generator PCG64(42). El generador se reinicia para cada CNN. Se incluye el último lote incompleto.",
+  "backend": "jax",
+  "plataforma": "cpu",
+  "precision": "float32",
+  "optimizador": {"nombre": "Adam", "learning_rate": 0.001, "beta_1": 0.9, "beta_2": 0.999, "epsilon": 1e-7, "amsgrad": false},
+  "perdida": "binary_crossentropy",
+  "epsilon_log_loss": 1e-15,
+  "tolerancia_recarga": 1e-6,
+  "ramas": {
+    "mensual": {"filtros": [8, 16], "kernel": 3, "stride_primera_conv": 2, "pool": [2, 2], "rasgos": 16, "semillas_glorot": [42, 43, 44]},
+    "diaria": {"filtros": [4, 8], "kernel": 3, "stride_primera_conv": 2, "pool": [4, 3], "rasgos": 8, "semillas_glorot": [45, 46, 47]}
+  },
+  "salida": {"activacion": "sigmoid", "semilla_glorot": 48},
+  "aumentos": false,
+  "ponderacion_de_clases": false
+}
