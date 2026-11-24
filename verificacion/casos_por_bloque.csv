@@ -1,0 +1,12 @@
+bloque,motivo,casos,fechas,activos
+entrenamiento,elegible,2210,65,34
+entrenamiento,salida_en_otro_bloque,34,1,34
+configuracion,historia_anterior,204,6,34
+configuracion,elegible,578,17,34
+configuracion,salida_en_otro_bloque,34,1,34
+umbral,historia_anterior,204,6,34
+umbral,elegible,986,29,34
+umbral,salida_en_otro_bloque,34,1,34
+prueba_retrospectiva,historia_anterior,204,6,34
+prueba_retrospectiva,elegible,136,4,34
+prueba_retrospectiva,sin_salida_en_fuente,34,1,34

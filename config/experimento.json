@@ -27,5 +27,45 @@
   "primera_comparacion": {
     "meses": 6,
     "ruedas": 9
-  }
+  },
+  "fuente": {
+    "version": "yf20261114T2019Z",
+    "sha256": "7906de97be2145f79434dcb1f0a474d2c01ed1da7cc4a7dad1ce63c35683eb31"
+  },
+  "particiones": {
+    "entrenamiento": [
+      "2015-01-01",
+      "2021-01-01"
+    ],
+    "configuracion": [
+      "2021-01-01",
+      "2023-01-01"
+    ],
+    "umbral": [
+      "2023-01-01",
+      "2026-01-01"
+    ],
+    "prueba_retrospectiva": [
+      "2026-01-01",
+      "2026-11-14"
+    ]
+  },
+  "historia_dentro_del_bloque": true,
+  "umbrales": [
+    0,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    1.01
+  ],
+  "efectivo_por_periodo": 0,
+  "semilla": 42,
+  "epocas_candidatas": [
+    1,
+    2,
+    4,
+    8
+  ]
 }

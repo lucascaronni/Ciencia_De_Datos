@@ -1,6 +1,21 @@
-# Iteración 2 · Comprar o pasar con velas mensuales y diarias
+# Iteración 2 · Comprar o mantener efectivo
 
-¿Una CNN mensual + diaria mejora el retorno neto de decidir entre comprar y mantener efectivo frente a una CNN mensual, sobre las mismas oportunidades? El EDA de desarrollo prepara las entradas de esa comparación. El experimento continúa la propuesta de Gabriel de sumar una vista corta a un gráfico de contexto.
+¿Agregar nueve velas diarias a una CNN de seis velas mensuales mejora el retorno neto de toda la cartera? Lucas lleva adelante esta iteración. El diseño fija una evaluación retrospectiva de cuatro cortes de 2026 y deja la confirmación para un período futuro.
+
+1. [Protocolo en lenguaje simple y criterios del generador](informe/protocolo.md)
+2. [Gráfico del calendario y las fronteras](verificacion/calendario.png)
+3. [Tabla de casos y descartes por bloque](verificacion/casos_por_bloque.csv) · [Detalle por activo y corte](verificacion/manifiesto.csv)
+4. [Ejemplo numérico de las cuatro estrategias y recorrido real de KO](informe/ejemplo.md)
+
+### Reproducir el diseño
+
+Desde la raíz del repositorio, con Python, pandas, NumPy y Matplotlib:
+
+```bash
+python3 src/verificar_protocolo.py '../entregables/02 — Base semanal/OHLC_diario_yf20261114T2019Z.csv'
+```
+
+El comando comprueba la huella del insumo local, reproduce el calendario del EDA, valida fechas, bloques y claves compartidas, y regenera las tablas y el gráfico en `verificacion/`. El manifiesto contiene exclusivamente identificadores, fechas y elegibilidad. [Configuración](config/experimento.json) · [Código](src/verificar_protocolo.py)
 
 ## EDA y representación · Desarrollo 2015–2025
 
@@ -15,7 +30,7 @@
 | Cobertura, volatilidad y resultados por grupo | [Activos](eda/activos_desarrollo.csv) · [Sector](eda/resultados_por_sector_desarrollo.csv) · [Tercil](eda/resultados_por_tercil_desarrollo.csv) · [Cruce](eda/resultados_por_sector_y_tercil_desarrollo.csv) · [Figura sectorial](eda/sectores_y_volatilidad.png) |
 | Concentración por fecha en el piloto | [Figura](eda/resultados_por_fecha_desarrollo.png) · [Tabla](eda/resultados_por_fecha_desarrollo.csv) · [Operaciones](eda/operaciones_desarrollo.csv) |
 | Procedimiento y código | [EDA](src/eda_desarrollo.py) · [Ventanas](src/ventanas.py) · [Cobertura y patrones](src/analizar_representacion.py) · [Figuras de escalas](src/comparar_escalas.py) |
-| Alcance y coordinación | [Diseño](informe/diseno.md) · [Plan de trabajo](informe/plan_de_trabajo.md) · [Configuración](config/experimento.json) |
+| Alcance y coordinación | [Diseño](informe/protocolo.md) · [Plan de trabajo](informe/plan_de_trabajo.md) · [Configuración](config/experimento.json) |
 
 La primera comparación usa 6 meses cerrados y una vista separada de 9 ruedas. Para el renderizado inicial se eligió [log relativo a la primera apertura de cada vista](eda/representacion.md#modelado-estocástico-y-escalas).
 
@@ -35,4 +50,4 @@ MPLBACKEND=Agg python3 src/eda_desarrollo.py "$ohlc_iteracion2" "$indice_cortes"
 MPLBACKEND=Agg python3 src/comparar_escalas.py "$ohlc_iteracion2"
 ```
 
-El SHA-256 esperado del OHLC congelado `yf20261114T2019Z` es `7906de97be2145f79434dcb1f0a474d2c01ed1da7cc4a7dad1ce63c35683eb31`. Los tres insumos locales se identifican por ruta y el repositorio versiona los resultados derivados. El EDA toma únicamente activo y fecha de corte del índice anterior. El desarrollo de esta iteración abarca 2015–2025 y requiere que t+20 también caiga en ese bloque. Los datos de 2026 quedan reservados para el diseño de evaluación.
+El SHA-256 esperado del OHLC congelado `yf20261114T2019Z` es `7906de97be2145f79434dcb1f0a474d2c01ed1da7cc4a7dad1ce63c35683eb31`. Los tres insumos locales se identifican por ruta y el repositorio versiona los resultados derivados. El EDA toma únicamente activo y fecha de corte del índice anterior. El desarrollo de esta iteración abarca 2015–2025 y requiere que t+20 también caiga en ese bloque. El manifiesto de 2026 se construye con fechas y cobertura.
