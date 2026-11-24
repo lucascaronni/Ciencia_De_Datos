@@ -2,6 +2,10 @@
 
 ¿Agregar nueve velas diarias a una CNN de seis velas mensuales mejora el retorno neto de toda la cartera? Lucas lleva adelante esta iteración. El diseño fija una evaluación retrospectiva de cuatro cortes de 2026 y deja la confirmación para un período futuro.
 
+**[Informe final del Trabajo Final de Ciencia de Datos 1](informe/informe_final.md)** · **[Guía breve para la defensa oral](informe/guia_oral.md)**
+
+Para recorrer la evidencia en GitHub, abrí el [caso de KO con sus dos imágenes](informe/evaluacion_2026.md#caso-ko), la [tabla de las cuatro estrategias por fecha](informe/evaluacion_2026.md#las-cuatro-decisiones-mensuales) y la [curva de capital](verificacion/etapa_4/capital_acumulado.png).
+
 ## Etapa 4 · Evaluación retrospectiva de 2026
 
 En cuatro cortes de julio a octubre de 2026, ambas CNN compraron los 136 casos con el umbral congelado de 0,50. Las dos redes y comprar siempre rindieron **+3,35 % neto**. Efectivo rindió **0,00 %**. Agregar la vista diaria cambió **0 de 136** decisiones.
