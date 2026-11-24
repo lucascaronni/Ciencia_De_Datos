@@ -1,0 +1,27 @@
+{
+  "prediccion": {
+    "mensual": {
+      "log_loss_por_fecha": 0.6964074858430955,
+      "brier": 0.25161948113979826,
+      "auc_roc": 0.5223880597014925,
+      "proporcion_positiva": 0.5073529411764706,
+      "p_media": 0.5475859725300003
+    },
+    "mensual_diaria": {
+      "log_loss_por_fecha": 0.7253757259404578,
+      "brier": 0.26512228406891697,
+      "auc_roc": 0.42028985507246375,
+      "proporcion_positiva": 0.5073529411764706,
+      "p_media": 0.6008128545740071
+    }
+  },
+  "diferencias_economicas": {
+    "mensual_diaria_menos_mensual_pp": 0.0,
+    "mensual_menos_comprar_siempre_pp": 0.0,
+    "mensual_diaria_menos_comprar_siempre_pp": 0.0
+  },
+  "etiquetas_positivas": 69,
+  "casos": 136,
+  "coinciden": 136,
+  "cambian": 0
+}

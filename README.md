@@ -2,9 +2,15 @@
 
 ¿Agregar nueve velas diarias a una CNN de seis velas mensuales mejora el retorno neto de toda la cartera? Lucas lleva adelante esta iteración. El diseño fija una evaluación retrospectiva de cuatro cortes de 2026 y deja la confirmación para un período futuro.
 
+## Etapa 4 · Evaluación retrospectiva de 2026
+
+En cuatro cortes de julio a octubre de 2026, ambas CNN compraron los 136 casos con el umbral congelado de 0,50. Las dos redes y comprar siempre rindieron **+3,35 % neto**. Efectivo rindió **0,00 %**. Agregar la vista diaria cambió **0 de 136** decisiones.
+
+[Comando de reproducción](informe/reproducir_2026.md#comando-de-reproducción) · [Resumen económico](informe/evaluacion_2026.md#resumen-económico) · [Caso KO, de las imágenes al retorno](informe/evaluacion_2026.md#caso-ko)
+
 ## Etapa 3B · Modelos y reglas congelados
 
-**Resultado en el bloque de umbral.** Los dos modelos eligieron `p ≥ 0,50` y compraron los 986 casos de los 29 cortes. Los dos y comprar siempre terminaron en **126,10** desde 100 (**+26,10 % neto**). El efectivo terminó en **100**. La diferencia mensual + diaria menos mensual fue **0,00 puntos porcentuales** en este bloque de selección. Los resultados retrospectivos de 2026 siguen reservados.
+**Resultado en el bloque de umbral.** Los dos modelos eligieron `p ≥ 0,50` y compraron los 986 casos de los 29 cortes. Los dos y comprar siempre terminaron en **126,10** desde 100 (**+26,10 % neto**). El efectivo terminó en **100**. La diferencia mensual + diaria menos mensual fue **0,00 puntos porcentuales** en este bloque de selección. Los resultados retrospectivos de 2026 se mantuvieron reservados hasta la Etapa 4.
 
 ### De las velas a la probabilidad
 

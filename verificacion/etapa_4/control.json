@@ -1,0 +1,63 @@
+{
+  "commit_3b": "da093192ce0b8d30210dff6e9c4345a209b57b66",
+  "congelado_3b_sha256": "5f820b8e3081e1d6053237c87f3cfff950c3c568b617c7777be2c2d84b818633",
+  "configuracion_2026_sha256": "8741b214a04df3649b3663932514fdc8a499d0bb5eccfe3bafcbd7bf978d7217",
+  "evaluador_sha256": "acc1d9afa8236744629cda5616b5f0562fd4d5336a968eb5098511ab3c5b0989",
+  "recarga_3b_verificada": true,
+  "tolerancia_recarga": 1e-06,
+  "ohlc_sha256": "7906de97be2145f79434dcb1f0a474d2c01ed1da7cc4a7dad1ce63c35683eb31",
+  "indice_sha256": "5064cd62f564415de489edaa5fb831b019b56ceac599edd15581c90edfa1c211",
+  "manifiesto_reconstruido": true,
+  "png_verificados_por_bloque": {
+    "entrenamiento": {
+      "esperados": 2210,
+      "reales_por_cargador": 2210,
+      "cantidad_cortes": 65,
+      "png_mensuales_identicos": 2210,
+      "sha256_id_y_png_en_orden": {
+        "mensual": "0848f644dcf3ca4d1198ad880e470974a989cee8b34f304c3bce8a72b8675d61",
+        "diaria": "6ba0025e27e393264fd519fe65d9fdf389e35a5b327af3a507b13db8ed47fff0"
+      }
+    },
+    "configuracion": {
+      "esperados": 578,
+      "reales_por_cargador": 578,
+      "cantidad_cortes": 17,
+      "png_mensuales_identicos": 578,
+      "sha256_id_y_png_en_orden": {
+        "mensual": "594368360771e2faf7f43bd2db657b8c679111c160ad930266509004625633b5",
+        "diaria": "c913e4f4819bcc5c3837f8c893fce9c5d8bf0226f1e55d0dcc689c881581d1f0"
+      }
+    },
+    "umbral": {
+      "esperados": 986,
+      "reales_por_cargador": 986,
+      "cantidad_cortes": 29,
+      "png_mensuales_identicos": 986,
+      "sha256_id_y_png_en_orden": {
+        "mensual": "e9c8c851534257f8817ab9cbc89ba202543a5ff3c988464749a708cc2b79d7a5",
+        "diaria": "4f0d291a5070ce5be61d318a73064e4e778e2e87a516da7b628b6e33aae828c7"
+      }
+    },
+    "prueba_retrospectiva": {
+      "esperados": 136,
+      "reales_por_cargador": 136,
+      "cantidad_cortes": 4,
+      "png_mensuales_identicos": 136,
+      "sha256_id_y_png_en_orden": {
+        "mensual": "bb512ef83cccab1c005f639bc2e00a0c500b8295da0c55860dfbfb62b484f1e3",
+        "diaria": "8ce39ea12862539c1b5faed77b68b3e00a4f5e05a39a1897762ce3592904f96e"
+      },
+      "cortes": [
+        "2026-07-14",
+        "2026-08-13",
+        "2026-09-14",
+        "2026-10-13"
+      ]
+    }
+  },
+  "pesos_verificados": {
+    "mensual": "6045ea842bec8149fcf18b0ae919aeb09c87945d3cd25f582ec179cd90df6e57",
+    "mensual_diaria": "275709cd08920d5b2c5d0df0d20971f35888bc2f0c3a348d7e27684a963438b8"
+  }
+}
