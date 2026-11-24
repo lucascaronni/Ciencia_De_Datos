@@ -17,6 +17,8 @@
 | Procedimiento y código | [EDA](src/eda_desarrollo.py) · [Ventanas](src/ventanas.py) · [Cobertura y patrones](src/analizar_representacion.py) · [Figuras de escalas](src/comparar_escalas.py) |
 | Alcance y coordinación | [Diseño](informe/diseno.md) · [Plan de trabajo](informe/plan_de_trabajo.md) · [Configuración](config/experimento.json) |
 
+La primera comparación usa 6 meses cerrados y una vista separada de 9 ruedas. Para el renderizado inicial se eligió [log relativo a la primera apertura de cada vista](eda/representacion.md#modelado-estocástico-y-escalas).
+
 Los retornos corresponden al piloto de desarrollo. Usan costo total supuesto de 0,20 %, entrada en la apertura ajustada de t+1 y salida al cierre ajustado de t+20.
 
 ## Reproducir desde el workspace

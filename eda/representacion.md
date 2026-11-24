@@ -38,8 +38,8 @@ El movimiento browniano geométrico ofrece un punto de partida para pensar movim
 | Precio ajustado | Distancias y amplitud en USD ajustados. |
 | Log natural | Distancias logarítmicas. Conserva orden y dirección, y puede cambiar la proporción entre cuerpo y mechas. |
 | Min–max por vista | Transforma con el mínimo Low y máximo High de esa vista. Preserva proporciones internas y lleva todas las amplitudes a 1. |
-| **Relativo lineal** | **Candidato inicial para preservar la forma.** Aplica `100 × (P/P₀ − 1)` a los cuatro campos. `P₀` es la apertura inicial de la propia vista. Mantiene las proporciones entre segmentos de la vela y la amplitud en relación con el nivel inicial. |
-| Log relativo | Aplica `100 × ln(P/P₀)` con la misma referencia causal. Iguala las distancias de movimientos multiplicativos iguales y conserva dirección. Se prueba como cambio controlado de escala. |
+| Relativo lineal | Alternativa para comparar geometría. Aplica `100 × (P/P₀ − 1)` a los cuatro campos y conserva las proporciones entre segmentos de la vela. |
+| **Log relativo** | **Escala inicial acordada.** Aplica `100 × ln(P/P₀)` a cada nivel OHLC. `P₀` es la apertura inicial de la propia vista. Iguala las distancias de movimientos multiplicativos iguales, conserva la dirección y puede cambiar las proporciones de cuerpos y mechas. |
 
 La apertura inicial se calcula por separado en cada vista. En las muestras de 6 meses, KO cubre **11,95 puntos porcentuales** en la escala relativa lineal y COP **26,39**. Min–max muestra amplitud 1 en ambos. En la vela de agosto de COP, la razón mecha inferior/cuerpo es 0,78 en precio ajustado y en relativo lineal, y 0,81 en log. Las dos columnas relativas de las figuras usan límites comunes a KO, UNP y COP por frecuencia para ilustrar el efecto. [KO](escalas_KO.png) · [UNP](escalas_UNP.png) · [COP](escalas_COP.png) · [Medidas](medidas_escalas_desarrollo.csv)
 
@@ -62,5 +62,5 @@ El conteo de 3 de 1.292 del sondeo inicial correspondía a la **secuencia** de d
 ## Para acordar con Simon
 
 - Cotejar la cobertura hasta 2025, los terciles y el peso de unos pocos cortes. Definir cómo reportar la variación entre fechas y la dependencia de activos en el mismo corte. Registrar las variantes probadas. [Bailey et al.](https://escholarship.org/uc/item/4w1110bb)
-- Confirmar la cadencia de estudio y los límites temporales. Llevar 6 meses + 9 ruedas y la escala relativa lineal como primera configuración. Medir primero una diferencia por vez sobre oportunidades comunes.
+- Confirmar la cadencia de estudio y los límites temporales. Llevar 6 meses + 9 ruedas y el log relativo como primera configuración. Medir primero una diferencia por vez sobre oportunidades comunes.
 - En diseño temporal, auditar qué tramo de 2026 sigue disponible para evaluación y acordar costo y salida antes del entrenamiento.

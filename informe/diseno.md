@@ -30,7 +30,7 @@ La selección de ventana, etiqueta, umbral, escala y arquitectura precede a la p
 
 ## De los datos a una comparación que se pueda explicar
 
-1. Usar el EDA como evidencia para la primera comparación. El renderizado inicial parte de precio relativo a la primera apertura de cada vista para preservar proporciones de cuerpos y mechas. El log relativo queda como cambio de escala controlado. Verificar resolución y recortes antes de entrenar.
+1. Usar el EDA como evidencia para la primera comparación. El renderizado inicial aplica `100 × ln(P/P₀)` a cada nivel OHLC, con la primera apertura de su propia vista como `P₀`. Usar la misma escala y los mismos límites para la rama mensual en ambos modelos. Medir recortes y resolución de cuerpos y mechas antes de entrenar. El relativo lineal queda como variante para comparar geometría.
 2. Fijar el diseño. Acotar candidatos de ventanas y cualquier combinación de patrones. Cada patrón nombrado necesita una regla en OHLC, una fuente y suficientes ocurrencias para compararlo.
 3. Implementar el generador desde el CSV congelado, con caché local por fuente, activo, corte, vista y parámetros. Separar el gráfico explicativo de los píxeles que entran a la red.
 4. Entrenar comparadores sencillos y CNN mensual y mensual + diaria. En cada comparación modificar una decisión con las demás fijas y registrar datos, configuración, pesos y métricas.
