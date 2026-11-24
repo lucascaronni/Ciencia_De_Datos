@@ -82,8 +82,9 @@ def predecir(modelo, imagenes, lote):
 def verificar_escalado(modelo, cfg, imagenes):
     esc = cfg["escalado_pixeles"]
     registros = {}
-    for vista, imagen in zip(("mensual", "diaria"), imagenes):
-        idx = 0 if vista == "mensual" else 1
+    for idx, entrada in enumerate(modelo.inputs):
+        vista = entrada.name
+        imagen = imagenes[idx]
         capa = modelo.get_layer(f"{vista}_escala")
         primera_conv = modelo.get_layer(f"{vista}_conv1")
         inspeccion = keras.Model(modelo.inputs[idx], [capa.output, primera_conv.input])
