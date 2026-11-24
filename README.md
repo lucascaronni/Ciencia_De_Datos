@@ -2,7 +2,7 @@
 
 ¿Agregar nueve velas diarias a una CNN de seis velas mensuales mejora el retorno neto de toda la cartera? Lucas lleva adelante esta iteración. El diseño fija una evaluación retrospectiva de cuatro cortes de 2026 y deja la confirmación para un período futuro.
 
-**[Informe final del Trabajo Final de Ciencia de Datos 1](informe/informe_final.md)** · **[Guía breve para la defensa oral](informe/guia_oral.md)**
+**[Informe académico en Word](informe/Informe_academico.docx?raw=true)** · [Leer el informe completo en GitHub](informe/informe_final.md) · [Guía breve para la defensa oral](informe/guia_oral.md)
 
 Para recorrer la evidencia en GitHub, abrí el [caso de KO con sus dos imágenes](informe/evaluacion_2026.md#caso-ko), la [tabla de las cuatro estrategias por fecha](informe/evaluacion_2026.md#las-cuatro-decisiones-mensuales) y la [curva de capital](verificacion/etapa_4/capital_acumulado.png).
 
