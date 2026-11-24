@@ -1,0 +1,12 @@
+{
+  "bloques_historicos": {
+    "desarrollo": ["2015-01-01", "2023-01-01"],
+    "validacion": ["2023-01-01", "2025-01-01"],
+    "prueba": ["2025-01-01", "2026-11-14"]
+  },
+  "ventanas_mensuales_candidatas": [3, 6],
+  "ventanas_diarias_candidatas": [5, 10, 20],
+  "ruedas_de_tenencia_piloto": 20,
+  "costo_total_piloto": 0.002,
+  "volatilidad": "Desvío de retornos simples diarios en desarrollo, anualizado con raíz de 252"
+}
