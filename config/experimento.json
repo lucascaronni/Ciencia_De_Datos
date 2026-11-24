@@ -11,14 +11,21 @@
   },
   "ventanas_mensuales_candidatas": [
     3,
-    6
+    6,
+    9,
+    12
   ],
   "ventanas_diarias_candidatas": [
     5,
+    9,
     10,
     20
   ],
   "ruedas_de_tenencia_piloto": 20,
   "costo_total_piloto": 0.002,
-  "volatilidad": "Desvío de retornos simples diarios en desarrollo, anualizado con raíz de 252"
+  "volatilidad": "Desvío de retornos simples diarios en desarrollo, anualizado con raíz de 252",
+  "primera_comparacion": {
+    "meses": 6,
+    "ruedas": 9
+  }
 }

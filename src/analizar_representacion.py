@@ -3,7 +3,7 @@ from itertools import product
 
 import pandas as pd
 
-from ventanas import extraer_ventana
+from ventanas import extraer_ventana, vistas_separadas
 
 
 def patrones(velas):
@@ -55,7 +55,7 @@ def resumen_ventana(ventanas, llaves):
     }
 
 
-def resumir_patrones(vistas, interseccion, destino):
+def resumir_patrones(vistas, interseccion, primera, destino):
     resultados = []
     largos_minimos = {"doji": 1, "martillo": 4, "envolvente_alcista": 4}
     for (unidad, n), ventanas in vistas.items():
@@ -72,19 +72,18 @@ def resumir_patrones(vistas, interseccion, destino):
                 })
     pd.DataFrame(resultados).to_csv(destino / "patrones_desarrollo.csv", index=False)
 
-    # Sondeo cronológico en 3 meses + 10 ruedas, sobre su propio conjunto elegible.
-    mensual, diaria = vistas["meses", 3], vistas["ruedas", 10]
-    universo = mensual.keys() & diaria.keys()
+    mensual = vistas["meses", primera["meses"]]
+    diaria = vistas["ruedas", primera["ruedas"]]
+    universo = {llave for llave in mensual.keys() & diaria.keys()
+                if mensual[llave][1][-1] < diaria[llave][1][0]}
     ocurrencias = []
     for activo, corte in sorted(universo):
         llave = activo, corte
-        velas_m, fechas_m = mensual[llave]
+        velas_m, _ = mensual[llave]
         velas_d, _ = diaria[llave]
         if not patrones(velas_m).doji.iloc[-1]:
             continue
-        # Las dos velas de la envolvente y la caída previa deben caer después del mes.
-        posterior = velas_d.loc[velas_d.index > fechas_m[-1]]
-        senales = patrones(posterior).query("envolvente_alcista")
+        senales = patrones(velas_d).loc[lambda filas: filas.envolvente_alcista]
         if not senales.empty:
             ocurrencias.append({
                 "activo": activo, "corte": corte, "mes_doji": velas_m.index[-1],
@@ -122,10 +121,15 @@ def analizar_representacion(series, calendario, operaciones, config, destino):
     resumen = pd.DataFrame(coberturas)
     resumen.to_csv(destino / "cobertura_ventanas_desarrollo.csv", index=False)
     cruces = []
+    elegibles_sin_cruce = {}
     for m, d in product(meses, ruedas):
         mensual, diaria = vistas["meses", m], vistas["ruedas", d]
         llaves = mensual.keys() & diaria.keys()
+        elegibles_sin_cruce[m, d] = {
+            llave for llave in llaves if mensual[llave][1][-1] < diaria[llave][1][0]
+        }
         for alcance, muestra in [("propio", llaves), ("comun", comun)]:
+            separados = resumen_llaves(elegibles_sin_cruce[m, d] & muestra)
             compartidas = {
                 llave: len(mensual[llave][1].intersection(diaria[llave][1]))
                 for llave in muestra
@@ -133,16 +137,51 @@ def analizar_representacion(series, calendario, operaciones, config, destino):
             solapes = {llave for llave, n in compartidas.items() if n > 0}
             cruces.append({
                 "meses": m, "ruedas": d, "alcance": alcance, **resumen_llaves(muestra),
+                **{f"{k}_sin_cruce": valor for k, valor in separados.items()},
                 "casos_con_ruedas_en_ambas_vistas": len(solapes),
                 "fechas_con_ruedas_en_ambas_vistas": len({corte for _, corte in solapes}),
                 "max_ruedas_en_ambas_vistas": max(compartidas.values(), default=0),
             })
     pd.DataFrame(cruces).to_csv(destino / "combinaciones_ventanas_desarrollo.csv", index=False)
+    primera = config["primera_comparacion"]
+    llaves_primera = elegibles_sin_cruce[primera["meses"], primera["ruedas"]]
     manifiesto = [
         {"activo": activo, "corte": corte, "interseccion_todas": (activo, corte) in comun,
+         "primera_comparacion_sin_cruce": (activo, corte) in llaves_primera,
          **{f"{n}_{unidad}": (activo, corte) in vistas[unidad, n] for unidad, n in candidatos}}
         for activo, corte in sorted(llaves_piloto)
     ]
     pd.DataFrame(manifiesto).to_csv(destino / "elegibilidad_ventanas_desarrollo.csv", index=False)
-    resumir_patrones(vistas, comun, destino)
+    resumir_patrones(vistas, comun, primera, destino)
+    auditar_cadencia(series, calendario, config, destino)
     return resumen
+
+
+def auditar_cadencia(series, calendario, config, destino):
+    """Cuenta oportunidades factibles con un corte por mes y tenencias sin superposición."""
+    primera = config["primera_comparacion"]
+    tenencia = config["ruedas_de_tenencia_piloto"]
+    anterior = -tenencia
+    meses_usados = set()
+    cortes = []
+    for i, corte in enumerate(calendario[:-tenencia]):
+        mes = corte.to_period("M")
+        if mes in meses_usados or i - anterior < tenencia:
+            continue
+        horizonte = calendario[i:i + tenencia + 1]
+        elegibles = [
+            vistas for serie in series.values()
+            if horizonte.isin(serie.index).all()
+            if (vistas := vistas_separadas(serie, calendario, corte, **primera)) is not None
+        ]
+        if not elegibles:
+            continue
+        (_, mensual), (_, diaria) = elegibles[0]
+        cortes.append({
+            "corte": corte, "mensual_inicio": mensual[0], "mensual_fin": mensual[-1],
+            "diaria_inicio": diaria[0], "entrada": horizonte[1], "salida": horizonte[-1],
+            "activos": len(elegibles),
+        })
+        anterior = i
+        meses_usados.add(mes)
+    pd.DataFrame(cortes).to_csv(destino / "cadencia_mensual_desarrollo.csv", index=False)

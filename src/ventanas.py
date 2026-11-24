@@ -55,3 +55,11 @@ def extraer_ventana(serie, calendario, corte, cantidad, unidad):
     if unidad == "meses":
         velas = velas.groupby(velas.index.to_period("M")).agg(AGREGACION)
     return velas, fechas
+
+
+def vistas_separadas(serie, calendario, corte, meses, ruedas):
+    mensual, fechas_m = extraer_ventana(serie, calendario, corte, meses, "meses")
+    diaria, fechas_d = extraer_ventana(serie, calendario, corte, ruedas, "ruedas")
+    if mensual is None or diaria is None or fechas_m[-1] >= fechas_d[0]:
+        return None
+    return (mensual, fechas_m), (diaria, fechas_d)

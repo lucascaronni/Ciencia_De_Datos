@@ -12,49 +12,55 @@ La volatilidad histórica va de 17,8 % a 39,1 %. El gráfico por fecha anualiza 
 
 ## Ventanas y muestra común
 
-| Candidata | Casos | Fechas | Activos | Pares consecutivos de fechas con ruedas compartidas |
+La primera comparación usa **6 meses cerrados frente a 6 meses cerrados + 9 ruedas**. Por activo y corte, la última rueda de la mensual debe preceder a la primera de la diaria. La vela mensual toma apertura inicial, máximo, mínimo y cierre final. La diaria termina en el corte. La CNN mensual y la de dos vistas deben usar exactamente las mismas oportunidades y la misma rama mensual.
+
+| Meses cerrados | Casos con 9 ruedas sin cruce | Fechas | Activos | Pares consecutivos de fechas con ruedas mensuales compartidas |
 |---|---:|---:|---:|---:|
-| 3 meses cerrados | 1.292 | 38 | 34 | 0 de 37 |
-| 6 meses cerrados | 1.258 | 37 | 34 | 34 de 36 |
-| 5 ruedas | 1.292 | 38 | 34 | 0 de 37 |
-| 10 ruedas | 1.292 | 38 | 34 | 0 de 37 |
-| 20 ruedas | 1.292 | 38 | 34 | 0 de 37 |
-| Intersección de las cinco | 1.258 | 37 | 34 | Depende de la vista |
+| 3 | 1.292 | 38 | 34 | 0 de 37 |
+| **6** | **1.258** | **37** | **34** | 34 de 36 |
+| 9 | 1.224 | 36 | 34 | 33 de 35 |
+| 12 | 1.190 | 35 | 34 | 34 de 34 |
 
-Cada oportunidad es un activo y corte con las ruedas completas según el calendario de desarrollo del CSV. La vela mensual toma apertura inicial, máximo, mínimo y cierre final. Excluye el mes del corte. La vista diaria incluye el corte. En 6 meses se pierden los 34 casos del 26/06/2015 porque faltaría diciembre de 2014. Se comparten hasta 65 ruedas entre cortes consecutivos de un mismo activo. [Recuentos](cobertura_ventanas_desarrollo.csv) · [Claves elegibles por candidata](elegibilidad_ventanas_desarrollo.csv)
+Comparar los cuatro largos en las mismas oportunidades requiere las **1.190 claves comunes**. Doce meses agrega más contexto y comparte hasta 192 ruedas entre cortes consecutivos del mismo activo. Seis meses comparte hasta 65. En los cortes heredados, 9 ruedas es la mayor longitud diaria fija sin perder casos por cruce. Con mensual de 6 meses, 10 ruedas comparten una sesión en 68 casos y 20 ruedas cruzan en los 1.258. Las opciones con cruces quedan en el recuento de factibilidad. Una ventana de 20 ruedas con separación requeriría terminar la mensual en el último mes completo anterior al inicio de la diaria. En esa variante, ambos comparadores tendrían que recibir esa misma mensual. [Recuentos](cobertura_ventanas_desarrollo.csv) · [Cruces](combinaciones_ventanas_desarrollo.csv) · [Claves elegibles](elegibilidad_ventanas_desarrollo.csv)
 
-En KO al **12/09/2025**, tres meses muestran junio–agosto y seis añaden marzo–mayo. Las cinco ruedas empiezan el 08/09, las diez el 29/08 y las veinte el 15/08. Las diez comparten el 29/08 con la mensual. En todo desarrollo, 5 ruedas comparte 0 días entre vistas, 10 comparte una rueda en 68 casos (13/09/2024 y 12/09/2025), y 20 comparte hasta 11 en 1.258 casos de 37 fechas. La información compartida ya existía al corte. [Figura de KO](ventanas_KO.png) · [Cruces entre vistas](combinaciones_ventanas_desarrollo.csv)
+En KO al **12/09/2025**, la mensual de 6 velas usa ruedas del **03/03 al 29/08** y la diaria de 9 usa del **02/09 al 12/09**. En ese corte, ampliar a diez arrastra la última rueda de agosto. [Figura de KO](ventanas_KO.png)
 
-**Para revisar.** Probar primero **3 meses frente a 3 meses + 10 ruedas** conserva los 1.292 casos y aporta más detalle reciente que 5 ruedas. Si el equipo quiere vistas sin ruedas compartidas en ningún corte, 5 ruedas conserva la cobertura. Evaluar 6 meses requiere usar las 1.258 oportunidades comunes y acordar cómo tratar el solapamiento entre cortes. El rendimiento predictivo y económico se mide después.
+### Más oportunidades dentro de desarrollo
 
-## Escalas sobre las mismas velas
+Con el primer corte factible de cada mes, 6 meses + 9 ruedas y al menos 20 ruedas entre cortes, hay **125 fechas y 4.250 casos elegibles** entre julio de 2015 y noviembre de 2025. En cada fecha, la salida del piloto queda como máximo en el corte siguiente y la entrada siguiente es posterior. Este recuento cuantifica cobertura antes de dividir datos o generar imágenes. Los cortes cercanos comparten parte de la historia mensual, y los 34 activos de una fecha comparten el entorno de mercado. Conviene medir variación y desempeño por fecha, con todos sus activos en el mismo bloque. Se conserva 2026 como reserva hasta verificar la independencia y la cobertura de sus cortes. El OHLC congelado empieza en 2015. [Calendario alternativo](cadencia_mensual_desarrollo.csv)
 
-| Escala | Qué muestran cuerpos, mechas y amplitud |
+## Modelado estocástico y escalas
+
+El movimiento browniano geométrico ofrece un punto de partida para pensar movimientos proporcionales. En ese modelo, el logaritmo de la razón de precios expresa el retorno logarítmico. La volatilidad condicional puede variar en el tiempo, como formaliza ARCH. Para este proyecto, esto motiva probar una representación relativa y conservar la diferencia visual entre períodos tranquilos y agitados. Los supuestos del movimiento browniano geométrico no quedan validados por dibujar en log. [MIT OpenCourseWare, cálculo estocástico](https://ocw.mit.edu/courses/18-642-topics-in-mathematics-with-applications-in-finance-fall-2024/mit18_642_f24_lec19_1.pdf) · [Engle, 1982](https://doi.org/10.2307/1912773)
+
+| Escala | Qué representa |
 |---|---|
 | Precio ajustado | Distancias y amplitud en USD ajustados. |
-| Log natural | Distancias logarítmicas, equivalentes al logaritmo de razones. Conserva orden y dirección. Un mismo cambio en USD ocupa menos altura cuanto mayor sea el precio, por lo que puede cambiar la proporción entre cuerpo y mechas. El log numérico es reversible. |
-| Min–max por vista | Un mismo mínimo Low y máximo High para los cuatro campos. Preserva proporciones y dirección dentro de la vista. Todas las amplitudes pasan a 1 y se pierden el nivel y la amplitud originales si solo se guarda la imagen normalizada. Un extremo puede comprimir las demás velas. |
+| Log natural | Distancias logarítmicas. Conserva orden y dirección, y puede cambiar la proporción entre cuerpo y mechas. |
+| Min–max por vista | Transforma con el mínimo Low y máximo High de esa vista. Preserva proporciones internas y lleva todas las amplitudes a 1. |
+| **Relativo lineal** | **Candidato inicial para preservar la forma.** Aplica `100 × (P/P₀ − 1)` a los cuatro campos. `P₀` es la apertura inicial de la propia vista. Mantiene las proporciones entre segmentos de la vela y la amplitud en relación con el nivel inicial. |
+| Log relativo | Aplica `100 × ln(P/P₀)` con la misma referencia causal. Iguala las distancias de movimientos multiplicativos iguales y conserva dirección. Se prueba como cambio controlado de escala. |
 
-Al 12/09/2025, los rangos en 3 meses y 10 ruedas son **4,55 y 2,44 USD en KO** (volatilidad baja, 17,8 %), **22,73 y 12,60 en UNP** (media, 25,3 %) y **14,34 y 8,86 en COP** (alta, 38,0 %). En COP, la mecha inferior de agosto mide 3,62 USD y el cuerpo 4,66 USD. En log pasan a 0,04041 y 0,04979, por lo que la relación mecha/cuerpo cambia de 0,78 a 0,81. [KO](escalas_KO.png) · [UNP](escalas_UNP.png) · [COP](escalas_COP.png) · [Medidas](medidas_escalas_desarrollo.csv)
+La apertura inicial se calcula por separado en cada vista. En las muestras de 6 meses, KO cubre **11,95 puntos porcentuales** en la escala relativa lineal y COP **26,39**. Min–max muestra amplitud 1 en ambos. En la vela de agosto de COP, la razón mecha inferior/cuerpo es 0,78 en precio ajustado y en relativo lineal, y 0,81 en log. Las dos columnas relativas de las figuras usan límites comunes a KO, UNP y COP por frecuencia para ilustrar el efecto. [KO](escalas_KO.png) · [UNP](escalas_UNP.png) · [COP](escalas_COP.png) · [Medidas](medidas_escalas_desarrollo.csv)
 
-Los ejes se ajustan a cada panel para inspección. En imágenes sin ejes, el autoajuste por ventana puede volver equivalentes el precio lineal y el min–max en píxeles. El renderizado debe fijar límites, tamaño y márgenes. `keras.layers.Rescaling(1/255)` actúa después del dibujo sobre intensidades RGB, conserva la posición de los píxeles y cumple otra función. La elección de escala sigue abierta. Con los apuntes de modelado estocástico queda por revisar si interesa preservar amplitudes entre cortes, cómo tratar cambios de nivel y de volatilidad, y qué supuestos justifican trabajar con diferencias logarítmicas. El log de niveles por sí solo no garantiza estacionariedad. [Documentación de Keras](https://keras.io/api/layers/preprocessing_layers/image_preprocessing/rescaling/)
+Para imágenes de la CNN, calibrar límites y resolución por vista **solo con entrenamiento de cada partición**, aplicar los mismos límites en evaluación y medir cuántas velas se recortan o quedan por debajo de un píxel. Mantener ancho de velas, márgenes y resolución comparables. `keras.layers.Rescaling(1/255)` transforma intensidades de píxeles después del dibujo. La separación mensual/diaria evita duplicar una rueda dentro del ejemplo. El control de fuga temporal exige además respetar corte, horizonte y fronteras entre bloques. [Scikit-learn, fuga de datos](https://scikit-learn.org/stable/common_pitfalls.html#data-leakage) · [Keras, Rescaling](https://keras.io/api/layers/preprocessing_layers/image_preprocessing/rescaling/)
 
 ## Patrones OHLC
 
 `B = |C − O|` es el cuerpo, `R = H − L` el rango y las mechas son `H − max(O,C)` y `min(O,C) − L`. La caída previa se operacionaliza como tres cierres consecutivos descendentes hasta la vela anterior al disparo. En la envolvente, el tercero es el de la primera vela del patrón. Se exige que todo el contexto esté visible. Los umbrales numéricos son del EDA.
 
-| Patrón | Regla sobre OHLC ajustado | Casos entre 1.292 vistas de 10 ruedas |
+| Patrón | Regla sobre OHLC ajustado | Casos entre 1.292 vistas de 9 ruedas |
 |---|---|---:|
-| Doji | `R > 0` y `B ≤ 0,10 × R`. | 871, en 38 fechas y 34 activos. [Ponsi, cap. 14](https://onlinelibrary.wiley.com/doi/10.1002/9781119204800.ch14) |
-| Martillo | Caída previa, `B > 0`, mecha inferior ≥ `2 × B` y superior ≤ `0,10 × R`. | 53, en 25 fechas y 28 activos. [Ponsi, cap. 13, p. 144](https://onlinelibrary.wiley.com/doi/10.1002/9781119204800.ch13) · [Manual, p. 25](https://drive.google.com/file/d/1zz5J7nYJ4EPZVtIJVCf-_pt9IVoK_K4J/view) |
-| Envolvente alcista | Caída previa, primera vela bajista y segunda alcista, `O₂ < L₁`, `H₂ > H₁` y `C₂ > O₁`. Variante estricta de rango completo. | 25, en 16 fechas y 17 activos. [Ponsi, cap. 13, figs. 13.7–13.8](https://onlinelibrary.wiley.com/doi/10.1002/9781119204800.ch13) |
+| Doji | `R > 0` y `B ≤ 0,10 × R`. | 825, en 38 fechas y 34 activos. [Ponsi, cap. 14](https://onlinelibrary.wiley.com/doi/10.1002/9781119204800.ch14) |
+| Martillo | Caída previa, `B > 0`, mecha inferior ≥ `2 × B` y superior ≤ `0,10 × R`. | 48, en 23 fechas y 27 activos. [Ponsi, cap. 13, p. 144](https://onlinelibrary.wiley.com/doi/10.1002/9781119204800.ch13) · [Manual, p. 25](https://drive.google.com/file/d/1zz5J7nYJ4EPZVtIJVCf-_pt9IVoK_K4J/view) |
+| Envolvente alcista | Caída previa, primera vela bajista y segunda alcista, `O₂ < L₁`, `H₂ > H₁` y `C₂ > O₁`. Variante estricta de rango completo. | 14, en 10 fechas y 12 activos. [Ponsi, cap. 13, figs. 13.7–13.8](https://onlinelibrary.wiley.com/doi/10.1002/9781119204800.ch13) |
 
 Los conteos son casos con alguna ocurrencia visible. El CSV incluye la presencia en la última vela y el contexto mínimo. En 3 meses faltan velas para aplicar las dos reglas con caída previa. Como antecedentes, Chen y Tsai localizan patrones con GAF, Hung y Chen aprenden representaciones de subgráficos, y Brim y Flann estudian mapas de características en otra estrategia. [Recuentos](patrones_desarrollo.csv) · [Chen y Tsai](https://arxiv.org/abs/2201.08669) · [Hung y Chen](https://doi.org/10.1371/journal.pone.0252404) · [Brim y Flann](https://doi.org/10.1371/journal.pone.0263181)
 
-Se sondeó **doji en el último mes cerrado y luego envolvente alcista en las últimas 10 ruedas**, exigiendo que las cuatro ruedas de contexto diario sean posteriores al mes. Apareció en **3 de 1.292 casos**, en CVX, HD y XOM. Queda como ilustración para clase por su baja frecuencia. Los patrones individuales sirven para anotar ejemplos. [Conteo](combinacion_patrones_desarrollo.csv) · [Casos reales](ejemplos_combinacion_patrones.csv)
+El conteo de 3 de 1.292 del sondeo inicial correspondía a la **secuencia** de doji mensual seguido de envolvente alcista diaria. En la configuración separada de 6 meses + 9 ruedas, se exige un doji en el último mes seguido de la envolvente y sus ruedas de contexto en la diaria. Aparece en **2 de 1.258** casos, CVX y XOM. Sirve para ilustrar la secuencia. El doji aislado aparece en 825 de las 1.292 vistas diarias candidatas de 9 ruedas. [Conteo de la secuencia](combinacion_patrones_desarrollo.csv) · [Casos reales](ejemplos_combinacion_patrones.csv)
 
 ## Para acordar con Simon
 
 - Cotejar la cobertura hasta 2025, los terciles y el peso de unos pocos cortes. Definir cómo reportar la variación entre fechas y la dependencia de activos en el mismo corte. Registrar las variantes probadas. [Bailey et al.](https://escholarship.org/uc/item/4w1110bb)
-- Elegir 5 o 10 ruedas para la primera comparación y acordar el tratamiento del cruce si se usa 10. Cotejar las escalas con los apuntes y fijar límites de renderizado.
+- Confirmar la cadencia de estudio y los límites temporales. Llevar 6 meses + 9 ruedas y la escala relativa lineal como primera configuración. Medir primero una diferencia por vez sobre oportunidades comunes.
 - En diseño temporal, auditar qué tramo de 2026 sigue disponible para evaluación y acordar costo y salida antes del entrenamiento.

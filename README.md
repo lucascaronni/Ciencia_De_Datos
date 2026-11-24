@@ -7,10 +7,10 @@
 | Para encontrar | Abrir |
 |---|---|
 | Hallazgos, fuentes y decisiones para Lucas y Simon | [Nota de revisión](eda/representacion.md) |
-| Qué ve la CNN en cada longitud | [Figura de KO con las cinco ventanas](eda/ventanas_KO.png) |
+| Qué ve la CNN en cada longitud | [Figura de KO con las ventanas](eda/ventanas_KO.png) |
 | Casos, fechas, activos y solapamiento entre cortes | [Cortes elegibles para t+20](eda/cortes_desarrollo.csv) · [Cobertura de ventanas](eda/cobertura_ventanas_desarrollo.csv) · [Intersección por activo y corte](eda/elegibilidad_ventanas_desarrollo.csv) |
-| Ruedas compartidas por la mensual y la diaria | [Combinaciones de ventanas](eda/combinaciones_ventanas_desarrollo.csv) |
-| Precio ajustado, log y min–max sobre las mismas velas | [KO, baja](eda/escalas_KO.png) · [UNP, media](eda/escalas_UNP.png) · [COP, alta](eda/escalas_COP.png) · [Medidas](eda/medidas_escalas_desarrollo.csv) |
+| Vistas separadas y más cortes de desarrollo | [Combinaciones sin cruce](eda/combinaciones_ventanas_desarrollo.csv) · [Cadencia mensual](eda/cadencia_mensual_desarrollo.csv) |
+| Escalas sobre las mismas velas y modelado estocástico | [KO, baja](eda/escalas_KO.png) · [UNP, media](eda/escalas_UNP.png) · [COP, alta](eda/escalas_COP.png) · [Medidas](eda/medidas_escalas_desarrollo.csv) |
 | Tres patrones OHLC y una secuencia exploratoria | [Recuentos](eda/patrones_desarrollo.csv) · [Secuencia](eda/combinacion_patrones_desarrollo.csv) · [Casos reales](eda/ejemplos_combinacion_patrones.csv) |
 | Cobertura, volatilidad y resultados por grupo | [Activos](eda/activos_desarrollo.csv) · [Sector](eda/resultados_por_sector_desarrollo.csv) · [Tercil](eda/resultados_por_tercil_desarrollo.csv) · [Cruce](eda/resultados_por_sector_y_tercil_desarrollo.csv) · [Figura sectorial](eda/sectores_y_volatilidad.png) |
 | Concentración por fecha en el piloto | [Figura](eda/resultados_por_fecha_desarrollo.png) · [Tabla](eda/resultados_por_fecha_desarrollo.csv) · [Operaciones](eda/operaciones_desarrollo.csv) |
