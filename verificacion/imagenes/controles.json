@@ -1,0 +1,124 @@
+{
+  "forma_rgb": [
+    192,
+    192,
+    3
+  ],
+  "bloques": {
+    "entrenamiento": {
+      "esperados": 2210,
+      "reales_por_cargador": 2210,
+      "cantidad_cortes": 65,
+      "png_mensuales_identicos": 2210,
+      "sha256_id_y_png_en_orden": {
+        "mensual": "0848f644dcf3ca4d1198ad880e470974a989cee8b34f304c3bce8a72b8675d61",
+        "diaria": "6ba0025e27e393264fd519fe65d9fdf389e35a5b327af3a507b13db8ed47fff0"
+      }
+    },
+    "configuracion": {
+      "esperados": 578,
+      "reales_por_cargador": 578,
+      "cantidad_cortes": 17,
+      "png_mensuales_identicos": 578,
+      "sha256_id_y_png_en_orden": {
+        "mensual": "594368360771e2faf7f43bd2db657b8c679111c160ad930266509004625633b5",
+        "diaria": "c913e4f4819bcc5c3837f8c893fce9c5d8bf0226f1e55d0dcc689c881581d1f0"
+      }
+    },
+    "umbral": {
+      "esperados": 986,
+      "reales_por_cargador": 986,
+      "cantidad_cortes": 29,
+      "png_mensuales_identicos": 986,
+      "sha256_id_y_png_en_orden": {
+        "mensual": "e9c8c851534257f8817ab9cbc89ba202543a5ff3c988464749a708cc2b79d7a5",
+        "diaria": "4f0d291a5070ce5be61d318a73064e4e778e2e87a516da7b628b6e33aae828c7"
+      }
+    },
+    "prueba_retrospectiva": {
+      "esperados": 136,
+      "reales_por_cargador": 136,
+      "cantidad_cortes": 4,
+      "png_mensuales_identicos": 136,
+      "sha256_id_y_png_en_orden": {
+        "mensual": "bb512ef83cccab1c005f639bc2e00a0c500b8295da0c55860dfbfb62b484f1e3",
+        "diaria": "8ce39ea12862539c1b5faed77b68b3e00a4f5e05a39a1897762ce3592904f96e"
+      },
+      "cortes": [
+        "2026-07-14",
+        "2026-08-13",
+        "2026-09-14",
+        "2026-10-13"
+      ]
+    }
+  },
+  "precios_posteriores": [
+    {
+      "id": "KO_2015-07-14",
+      "ruedas_posteriores_alteradas": 2852,
+      "factor": 1.37,
+      "original": {
+        "mensual": "121f238bbfd60ee6b4d392b683a9f6e18decce01754715c66fc6722287d41f09",
+        "diaria": "e496282f5df68a8da5fb7ab7d826c2d2a21099f1ec17676c20dfb8079089ef12"
+      },
+      "alterado": {
+        "mensual": "121f238bbfd60ee6b4d392b683a9f6e18decce01754715c66fc6722287d41f09",
+        "diaria": "e496282f5df68a8da5fb7ab7d826c2d2a21099f1ec17676c20dfb8079089ef12"
+      },
+      "truncado_al_corte": {
+        "mensual": "121f238bbfd60ee6b4d392b683a9f6e18decce01754715c66fc6722287d41f09",
+        "diaria": "e496282f5df68a8da5fb7ab7d826c2d2a21099f1ec17676c20dfb8079089ef12"
+      }
+    },
+    {
+      "id": "KO_2026-07-14",
+      "ruedas_posteriores_alteradas": 87,
+      "factor": 1.37,
+      "original": {
+        "mensual": "4c83f2089fb5de1f10e204691854a7e0090c5687e361067410c4bb67addc1a51",
+        "diaria": "1df7d967c32af604dc9bc26824b265b0a67720582a19370160d132ecb392101b"
+      },
+      "alterado": {
+        "mensual": "4c83f2089fb5de1f10e204691854a7e0090c5687e361067410c4bb67addc1a51",
+        "diaria": "1df7d967c32af604dc9bc26824b265b0a67720582a19370160d132ecb392101b"
+      },
+      "truncado_al_corte": {
+        "mensual": "4c83f2089fb5de1f10e204691854a7e0090c5687e361067410c4bb67addc1a51",
+        "diaria": "1df7d967c32af604dc9bc26824b265b0a67720582a19370160d132ecb392101b"
+      }
+    },
+    {
+      "id": "KO_2026-10-13",
+      "ruedas_posteriores_alteradas": 23,
+      "factor": 1.37,
+      "original": {
+        "mensual": "3e304307c4bba19347d3c46fd7d52ff4d2f638ca40109296eeb3f6b90af1787b",
+        "diaria": "ce1be6967bfba58ff910daf609d550b9c71e5a6d1de45700304430f30c910493"
+      },
+      "alterado": {
+        "mensual": "3e304307c4bba19347d3c46fd7d52ff4d2f638ca40109296eeb3f6b90af1787b",
+        "diaria": "ce1be6967bfba58ff910daf609d550b9c71e5a6d1de45700304430f30c910493"
+      },
+      "truncado_al_corte": {
+        "mensual": "3e304307c4bba19347d3c46fd7d52ff4d2f638ca40109296eeb3f6b90af1787b",
+        "diaria": "ce1be6967bfba58ff910daf609d550b9c71e5a6d1de45700304430f30c910493"
+      }
+    }
+  ],
+  "ejemplo": {
+    "id": "KO_2015-07-14",
+    "aperturas_ajustadas": {
+      "mensual": 29.299129,
+      "diaria": 27.756065
+    },
+    "sha256_png": {
+      "mensual": "121f238bbfd60ee6b4d392b683a9f6e18decce01754715c66fc6722287d41f09",
+      "diaria": "e496282f5df68a8da5fb7ab7d826c2d2a21099f1ec17676c20dfb8079089ef12"
+    }
+  },
+  "keras": {
+    "version": "3.10.0",
+    "backend": "jax",
+    "png_ko_verificados": 2
+  }
+}

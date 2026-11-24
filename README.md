@@ -2,6 +2,39 @@
 
 ¿Agregar nueve velas diarias a una CNN de seis velas mensuales mejora el retorno neto de toda la cartera? Lucas lleva adelante esta iteración. El diseño fija una evaluación retrospectiva de cuatro cortes de 2026 y deja la confirmación para un período futuro.
 
+## Etapa 3 · Generador de imágenes
+
+| Para encontrar | Abrir |
+|---|---|
+| Ejecutar desde el workspace | [Comando para reproducir](#reproducir-las-imágenes) |
+| Implementación | [Generador](src/generar_imagenes.py) · [Render de velas](src/render_velas.py) · [Cargadores](src/cargar_imagenes.py) |
+| Escala y procedencia del ajuste | [Parámetros del render](config/render.json) · [Escalas congeladas](config/escalas_imagenes.json) · [2.210 IDs de ajuste](verificacion/imagenes/ids_ajuste.txt) |
+| Resultados y límites | [Resumen de verificaciones](informe/generador.md) · [Recuentos y hashes](verificacion/imagenes/controles.json) · [Métricas de recorte y detalle](verificacion/imagenes/metricas.csv) |
+| KO al 14 de julio de 2015 | [Figura para clase](verificacion/imagenes/KO_2015-07-14_explicado.png) · [PNG mensual compartido](verificacion/imagenes/KO_2015-07-14_mensual.png) · [PNG diario](verificacion/imagenes/KO_2015-07-14_diaria.png) · [OHLC y log de las 15 velas](verificacion/imagenes/KO_2015-07-14_velas.csv) |
+
+### Reproducir las imágenes
+
+Desde la raíz del repositorio, con el OHLC congelado en la ruta del workspace:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-imagenes.txt
+ohlc_iteracion2='../entregables/02 — Base semanal/OHLC_diario_yf20261114T2019Z.csv'
+python src/generar_imagenes.py "$ohlc_iteracion2"
+```
+
+El comando reconstruye los controles de fechas, recalcula el ajuste de los 2.210 casos de entrenamiento y lo contrasta con los parámetros congelados. Escribe `data/imagenes/indice.csv`, los 7.820 PNG bajo `data/imagenes/cache/` y la evidencia en `data/imagenes/verificacion/`. `--sin-cache` redibuja el lote completo y `--destino` permite elegir otra carpeta local. Para una ruta distinta del OHLC, pasarla como primer argumento. El SHA-256 esperado figura en [Configuración del experimento](config/experimento.json).
+
+Para repetir también la lectura de los dos PNG de KO con Keras, ejecutar en el mismo entorno:
+
+```bash
+python -m pip install 'keras==3.10.0' 'jax[cpu]==0.4.30' 'scipy==1.13.1'
+KERAS_BACKEND=jax python src/generar_imagenes.py "$ohlc_iteracion2" --verificar-keras
+```
+
+## Diseño de la comparación
+
 1. [Protocolo en lenguaje simple y criterios del generador](informe/protocolo.md)
 2. [Gráfico del calendario y las fronteras](verificacion/calendario.png)
 3. [Tabla de casos y descartes por bloque](verificacion/casos_por_bloque.csv) · [Detalle por activo y corte](verificacion/manifiesto.csv)

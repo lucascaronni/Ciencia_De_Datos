@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "ancho": 192,
+  "alto": 192,
+  "margen": 4,
+  "ancho_cuerpo": 9,
+  "filas_por_cola": 12,
+  "cuantil_minimos": 0.005,
+  "cuantil_maximos": 0.995,
+  "metodo_cuantil": "linear",
+  "colores": {
+    "fondo": "#101826",
+    "sube": "#4FD9AD",
+    "baja": "#FF7A8A",
+    "plana": "#C0CBD9"
+  }
+}

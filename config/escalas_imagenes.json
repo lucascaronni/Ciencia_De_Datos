@@ -1,0 +1,27 @@
+{
+  "fuente": {
+    "version": "yf20261114T2019Z",
+    "sha256": "7906de97be2145f79434dcb1f0a474d2c01ed1da7cc4a7dad1ce63c35683eb31"
+  },
+  "manifiesto_sha256": "adc6b6fdfb828e4e05439c29854922daaa77001107a59f6f339705fe57c710cc",
+  "render_sha256": "283ef590e7833a5c33ca40b4ba05595345a182bb407f162c69112d4a970dbdc2",
+  "bloque_ajuste": "entrenamiento",
+  "cantidad_ids": 2210,
+  "ids_sha256": "0edbfd9a06bf75831539ce838ceb8ba05a48a1580c7897b2828bf0f0b3d0392e",
+  "escalas": {
+    "mensual": {
+      "limites_centrales_log": [
+        -59.07794205807466,
+        43.05441376826875
+      ],
+      "pixeles_por_unidad_log_central": 1.5568034117449436
+    },
+    "diaria": {
+      "limites_centrales_log": [
+        -16.89992081114511,
+        16.204775984790814
+      ],
+      "pixeles_por_unidad_log_central": 4.802943853559762
+    }
+  }
+}
