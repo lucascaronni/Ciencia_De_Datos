@@ -12,7 +12,7 @@ El Chat General registra acuerdos y traspasos. Los chats de trabajo usan el mism
 
 ## Primer bloque · EDA y representación
 
-Ya existe un primer EDA de 34 activos y 11 sectores. La siguiente pieza compara precio lineal, logaritmo y normalización de ventana en los mismos cortes de desarrollo. Mostrar en cada caso qué fechas ve la CNN y cómo cambian cuerpos, mechas y amplitud. Usar activos con distinta volatilidad y publicar el gráfico, el código de generación y una nota con las decisiones que siguen abiertas.
+El bloque usa 2015–2025 para comparar ventanas, escalas y patrones OHLC. Simon coteja cobertura, grupos y concentración por fecha. Lucas y Simon revisan la propuesta inicial de entradas en la [nota con los resultados](../eda/representacion.md). El diseño de validación y prueba se resuelve en el bloque de evaluación temporal.
 
 ## Cierre de cada chat
 

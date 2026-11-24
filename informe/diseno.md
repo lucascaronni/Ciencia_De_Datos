@@ -22,11 +22,11 @@ Reportar retorno neto de cartera por fecha y acumulado, exposición y cantidad d
 
 ## Ventanas y evaluación temporal
 
-El análisis ejecutado usa 2015–2022 para describir 34 activos en 11 sectores. Hay volatilidades anualizadas entre 18,6 % y 40,9 %. Consumo defensivo y servicios públicos quedan íntegramente en el tercil bajo del universo. Las comparaciones por volatilidad e industria tienen que informar la cobertura de cada grupo.
+El EDA de esta iteración usa desarrollo de **2015 a 2025 inclusive**. El calendario de cortes se toma del índice anterior. Se aplica la nueva frontera por fecha y se exige que la historia de las entradas, la apertura t+1 y el cierre t+20 queden en desarrollo. Las comparaciones de longitudes se hacen sobre oportunidades comunes. [Cobertura, escalas y patrones](../eda/representacion.md)
 
-Con el calendario histórico de desarrollo, 3 meses cubren 1.020 casos de 30 fechas, sin meses compartidos entre cortes consecutivos. Con 6 meses quedan 986 candidatos en 29 fechas, con meses compartidos en 28 pares consecutivos. Esto mide cobertura de calendario y solapamiento, previo al renderizado. Tres meses constituyen un punto de partida concreto. Seis meses requieren decidir si se acepta el solapamiento dentro de bloque o se amplía el paso entre cortes. Las comparaciones usan la intersección de oportunidades.
+La ampliación incorpora años que la primera iteración había asignado a evaluación. En la segunda iteración, 2026 queda fuera del EDA y como reserva para diseñar la evaluación. Antes de fijar validación y prueba, verificar qué cortes de 2026 ya se consultaron en la primera iteración y si queda un período independiente con cobertura suficiente. Si se reutilizan fechas examinadas, presentar su evaluación como retrospectiva.
 
-El archivo de configuración registra los bloques heredados. Para una confirmación independiente de la segunda iteración, documentar qué períodos ya se consultaron en la primera y confirmar la disponibilidad de un bloque posterior reservado. Si la cobertura obliga a usar fechas ya analizadas, informarlo como evaluación retrospectiva. Toda selección de ventana, etiqueta, umbral, escala y arquitectura precede a la puntuación de prueba. Guardar un manifiesto por decisión con ID, activo, inicio de vistas, corte, fecha de entrada, fecha de salida, bloque y referencia a los datos. Verificar que la información y el horizonte de cada ejemplo queden dentro del bloque asignado.
+La selección de ventana, etiqueta, umbral, escala y arquitectura precede a la puntuación de prueba. Guardar un manifiesto por decisión con ID, activo, inicio de vistas, corte, fecha de entrada, fecha de salida, bloque y referencia a los datos. Verificar que las entradas y el horizonte de cada ejemplo queden dentro del bloque asignado.
 
 ## De los datos a una comparación que se pueda explicar
 
@@ -36,7 +36,7 @@ El archivo de configuración registra los bloques heredados. Para una confirmaci
 4. Entrenar comparadores sencillos y CNN mensual y mensual + diaria. En cada comparación modificar una decisión con las demás fijas y registrar datos, configuración, pesos y métricas.
 5. Mostrar la decisión y el resultado con un ejemplo reproducible. La demo futura puede presentar corte, dos vistas, probabilidad y decisión. Para cortes históricos, el retorno se revela después de la predicción.
 
-El README sirve de entrada a código, gráficos e informe. El directorio local está preparado para llevarlo a GitHub con los insumos grandes fuera del repositorio. Las salidas visuales del EDA y los cuadros pequeños quedan junto a su código y configuración.
+El README enlaza el código, las figuras y las tablas derivadas del EDA. Los insumos originales se identifican por ruta y versión.
 
 ## Extensión posterior · noticias
 

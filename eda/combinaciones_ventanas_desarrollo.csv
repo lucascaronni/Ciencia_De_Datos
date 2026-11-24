@@ -1,0 +1,13 @@
+meses,ruedas,alcance,casos,fechas,activos,casos_con_ruedas_en_ambas_vistas,fechas_con_ruedas_en_ambas_vistas,max_ruedas_en_ambas_vistas
+3,5,propio,1292,38,34,0,0,0
+3,5,comun,1258,37,34,0,0,0
+3,10,propio,1292,38,34,68,2,1
+3,10,comun,1258,37,34,68,2,1
+3,20,propio,1292,38,34,1258,37,11
+3,20,comun,1258,37,34,1258,37,11
+6,5,propio,1258,37,34,0,0,0
+6,5,comun,1258,37,34,0,0,0
+6,10,propio,1258,37,34,68,2,1
+6,10,comun,1258,37,34,68,2,1
+6,20,propio,1258,37,34,1258,37,11
+6,20,comun,1258,37,34,1258,37,11
